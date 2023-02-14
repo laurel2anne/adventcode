@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+// ReadLines accepts a path to a file, opens that file for reading
+// and returns a slice of strings from the contents of the file.
 func ReadLines(path string) ([]string, error) {
 	var lines []string
 
@@ -25,6 +27,15 @@ func ReadLines(path string) ([]string, error) {
 	return lines, nil
 }
 
+// GetPuzzleTitle accepts a path to a puzzle description file, opens
+// file for reading and searches for the title of the puzzle
+// file describes. For example, it will search for the string:
+//
+// # --- Day 1: Calorie Counting ---
+//
+// will return:
+//
+// # Calorie Counting
 func GetPuzzleTitle(path string) (string, error) {
 	lines, err := ReadLines(path)
 	if err != nil {
@@ -42,6 +53,16 @@ func GetPuzzleTitle(path string) (string, error) {
 	return "", fmt.Errorf("title not found in input file %q: %v", path, err)
 }
 
+// GetPuzzleTitle accepts a path to a puzzle description file, opens
+// file for reading and searches for the solution of the puzzle
+// file describes if the solution has already been found.
+// For example, it will search for the string:
+//
+// # Your puzzle answer was 12345
+//
+// and return:
+//
+// # 12345
 func GetPuzzleSolution(path string, part int) (string, error) {
 	lines, err := ReadLines(path)
 	if err != nil {
